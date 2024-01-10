@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chating</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' style.css %}">
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+    <div class="wrapper">
+        <section class="chat-area">
+            <header>
+
+                <a href="{% url 'user:ChatHome' %}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+                <img src="{{imguser}}" alt="">
+                <div class="detail">
+                    <span>{{user1.username}}</span>
+                    <p>Active now</p>
+                </div>
+            </header>
+
+            {% if empty == False %}
+                <div class="chat-box" style="overflow-y: overlay;">
+                    {% for message in messages|dictsort:"id"%}
+                        {% if message.sender.id == user %}
+                            <div class="chat outgoing">
+                                <div class="detail">
+                                    <p>{{ message.message}}</p>
+                                </div>
+                            </div>
+                        {% else %}
+                             <div class="chat incoming">
+                                <img src="{{imguser}}" alt="">
+                                <div class="detail">
+                                    <p>{{ message.message}}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="chat-box" style="display: flex;    flex-direction: column;    justify-content: flex-end;">
+                </div>
+            {% endif %}
+
+            <form action="{% url 'user:ChatDetail' user1.id %}" class="typing-area" method="post">
+                {% csrf_token %}
+                <input type="text" placeholder="Type messsage here...." name="message">
+                <button><i class="fab fa-telegram-plane"></i></button>
+            </form>
+        </section>
+        <script>
+            var objDiv = document.querySelector(".chat-box");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+   <link rel="stylesheet" href="{% static 'css/style.css' style.css %}">
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+    <div class="wrapper">
+        <section class="form signup">
+            <header>Register</header>
+            <form action="{% url 'user:Create' %}" method="post">
+                {% csrf_token %}
+                {% if message != none %}
+                <div class="error-text" style="display: block;">{{message}}</div>
+                {% else %}
+                 <div class="error-text" style="display: none;"></div>
+                {% endif %}
+                <div class="name-detail">
+                    <div class="field input">
+                        <label>First name</label>
+                        {{ l.first_name }}
+                    </div>
+
+                    <div class="field input">
+                        <label>Last name</label>
+                        {{ l.last_name }}
+                    </div>
+                </div>
+
+                <div class="field input">
+                    <label>Username</label>
+                    {{ l.username }}
+                </div>
+
+                <div class="field input">
+                    <label>Email</label>
+                    {{ l.email }}
+
+                </div>
+
+                <div class="field input">
+                    <label>Phone number</label>
+                    {{ l.phone }}
+                </div>
+
+                <div class="field input">
+                    <label>Password</label>
+                    {{l.password}}
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+
+                <div class="field image">
+                    <label>Image</label>
+                    {{ l.image}}
+                </div>
+                <div class="field button">
+                    <input type="submit" value="Register">
+                </div>
+                <div class="link">Already have account?<a href="{% url 'user:Index' %}">Login now</a></div>
+            
+            </form>
+        </section>
+    </div>
+
+    <script src="{% static 'js/passShowHide.js'%}"></script>
+</body>
+</html>

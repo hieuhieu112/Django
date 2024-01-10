@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+    <div class="wrapper">
+        <section class="user">
+            <header>
+                <div class="content">
+                    <img src="{{ imguser }}" alt="">
+                    <div class="detail">
+                        <span>{{name}}</span>
+                        <p>Active now</p>
+                    </div>
+                </div>
+                <a href="{% url 'user:InfoUser' %}" class = "logout">Account</a>
+                <a href="{% url 'user:Index' %}" class = "logout">Log out</a>
+            </header>
+
+            <form action="{% url 'user:SearchUser' %}">
+                <div class="search" style="background-color: #ccc; border-radius: 5px; padding-left: 20px;">
+                    <input type="text" placeholder="Enter name to search..." name="relative">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+
+            <div class="user-list">
+                {% for u in users %}
+                    <a href="{% url 'user:ChatDetail' u.id%}">
+                        <div class="content">
+                            <img src="{{ u.images }}" alt="">
+                            <div class="detail">
+                                <span>{{u.first_name}}  {{u.last_name}}</span>
+                                <p>{{u.message}}</p>
+                            </div>
+                        </div>
+                        <div class="status-dot"><i class="fas fa-circle"></i></div>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </section>
+    </div>
+
+    <script src="{% static 'js/UserList.js' %}"></script>
+</body>
+</html>

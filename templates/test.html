@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+    <div class="header">
+        {% block head %}
+        {% endblock %}
+    </div>
+    <h1>Hiiii {{ name }}</h1>
+    <h2>My asset</h2>
+    <ul>
+        {% for item in taisan %}
+            {% if item == 'laptop' %}
+            <li>
+                <b>{{ item }}</b>
+            </li>
+            {% endif %}
+            <li>
+                <br>{{ item }}
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="wrapper">
+        <section class="form login">
+            <header>Realtime chat App</header>
+            <form action="#">
+                <div class="error-text">This is error text</div>
+
+                <div class="field input">
+                    <label>Email</label>
+                    <input type="text" placeholder="Enter your email">
+                </div>
+
+                <div class="field input">
+                    <label>Password</label>
+                    <input type="text" placeholder="Enter your password">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+
+
+                <div class="field button">
+                    <input type="submit" value="Register">
+                </div>
+                <div class="link">Not yet signed up?<a href="#">Sign up now</a></div>
+
+            </form>
+        </section>
+    </div>
+    <script src="js/passShowHide.js"></script>
+</body>
+</html>
